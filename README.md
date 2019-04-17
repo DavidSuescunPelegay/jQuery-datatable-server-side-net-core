@@ -21,6 +21,14 @@ This project was checked and tested using:
 - Microsoft Visual Studio Enterpise 2019 (version 16.0.28729.10) + JetBrains Resharper Ultimate (version 2018.3.4)
 - Windows 10 Pro (version 1809) (OS build 17763.404)
 
-## Author
+## Contributors
 
 * **David Suescun Pelegay** - *Developer* - [GitHub](https://github.com/DavidSuescunPelegay)
+
+## Issues
+
+Please, feel free to report any kind of issue [here](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/issues/new).
+
+## License
+
+- Code licensed under [MIT License](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/blob/master/LICENSE)
