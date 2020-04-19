@@ -1,63 +1,75 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace jQueryDatatableServerSideNetCore22.Models.AuxiliaryModels
 {
+    ///This view model class has been referred from example created by Marien Monnier at Soft.it. All credits to Marien for this class
+
     /// <summary>
     /// A full result, as understood by jQuery DataTables.
     /// </summary>
     /// <typeparam name="T">The data type of each row.</typeparam>
-    public class DTResult<T>
+    public class DtResult<T>
     {
         /// <summary>
         /// The draw counter that this object is a response to - from the draw parameter sent as part of the data request.
         /// Note that it is strongly recommended for security reasons that you cast this parameter to an integer, rather than simply echoing back to the client what it sent in the draw parameter, in order to prevent Cross Site Scripting (XSS) attacks.
         /// </summary>
-        public int draw { get; set; }
+        [JsonProperty("draw")]
+        public int Draw { get; set; }
 
         /// <summary>
         /// Total records, before filtering (i.e. the total number of records in the database)
         /// </summary>
-        public int recordsTotal { get; set; }
+        [JsonProperty("recordsTotal")]
+        public int RecordsTotal { get; set; }
 
         /// <summary>
         /// Total records, after filtering (i.e. the total number of records after filtering has been applied - not just the number of records being returned for this page of data).
         /// </summary>
-        public int recordsFiltered { get; set; }
+        [JsonProperty("recordsFiltered")]
+        public int RecordsFiltered { get; set; }
 
         /// <summary>
         /// The data to be displayed in the table.
         /// This is an array of data source objects, one for each row, which will be used by DataTables.
         /// Note that this parameter's name can be changed using the ajaxDT option's dataSrc property.
         /// </summary>
-        public IEnumerable<T> data { get; set; }
+        [JsonProperty("data")]
+        public IEnumerable<T> Data { get; set; }
+
+        public string PartialView { get; set; }
     }
 
     /// <summary>
     /// The additional columns that you can send to jQuery DataTables for automatic processing.
     /// </summary>
-    public abstract class DTRow
+    public abstract class DtRow
     {
         /// <summary>
         /// Set the ID property of the dt-tag tr node to this value
         /// </summary>
-        public virtual string DT_RowId => null;
+        [JsonProperty("DT_RowId")]
+        public virtual string DtRowId => null;
 
         /// <summary>
         /// Add this class to the dt-tag tr node
         /// </summary>
-        public virtual string DT_RowClass => null;
+        [JsonProperty("DT_RowClass")]
+        public virtual string DtRowClass => null;
 
         /// <summary>
         /// Add this data property to the row's dt-tag tr node allowing abstract data to be added to the node, using the HTML5 data-* attributes.
         /// This uses the jQuery data() method to set the data, which can also then be used for later retrieval (for example on a click event).
         /// </summary>
-        public virtual object DT_RowData => null;
+        [JsonProperty("DT_RowData")]
+        public virtual object DtRowData => null;
     }
 
     /// <summary>
     /// The parameters sent by jQuery DataTables in AJAX queries.
     /// </summary>
-    public class DTParameters
+    public class DtParameters
     {
         /// <summary>
         /// Draw counter.
@@ -69,12 +81,12 @@ namespace jQueryDatatableServerSideNetCore22.Models.AuxiliaryModels
         /// <summary>
         /// An array defining all columns in the table.
         /// </summary>
-        public DTColumn[] Columns { get; set; }
+        public DtColumn[] Columns { get; set; }
 
         /// <summary>
         /// An array defining how many columns are being ordering upon - i.e. if the array length is 1, then a single column sort is being performed, otherwise a multi-column sort is being performed.
         /// </summary>
-        public DTOrder[] Order { get; set; }
+        public DtOrder[] Order { get; set; }
 
         /// <summary>
         /// Paging first record indicator.
@@ -92,14 +104,14 @@ namespace jQueryDatatableServerSideNetCore22.Models.AuxiliaryModels
         /// <summary>
         /// Global search value. To be applied to all columns which have searchable as true.
         /// </summary>
-        public DTSearch Search { get; set; }
+        public DtSearch Search { get; set; }
 
         /// <summary>
         /// Custom column that is used to further sort on the first Order column.
         /// </summary>
         public string SortOrder => Columns != null && Order != null && Order.Length > 0
             ? (Columns[Order[0].Column].Data +
-               (Order[0].Dir == DTOrderDir.DESC ? " " + Order[0].Dir : string.Empty))
+               (Order[0].Dir == DtOrderDir.Desc ? " " + Order[0].Dir : string.Empty))
             : null;
 
         /// <summary>
@@ -112,7 +124,7 @@ namespace jQueryDatatableServerSideNetCore22.Models.AuxiliaryModels
     /// <summary>
     /// A jQuery DataTables column.
     /// </summary>
-    public class DTColumn
+    public class DtColumn
     {
         /// <summary>
         /// Column's data source, as defined by columns.data.
@@ -137,13 +149,13 @@ namespace jQueryDatatableServerSideNetCore22.Models.AuxiliaryModels
         /// <summary>
         /// Specific search value.
         /// </summary>
-        public DTSearch Search { get; set; }
+        public DtSearch Search { get; set; }
     }
 
     /// <summary>
     /// An order, as sent by jQuery DataTables when doing AJAX queries.
     /// </summary>
-    public class DTOrder
+    public class DtOrder
     {
         /// <summary>
         /// Column to which ordering should be applied.
@@ -155,22 +167,22 @@ namespace jQueryDatatableServerSideNetCore22.Models.AuxiliaryModels
         /// Ordering direction for this column.
         /// It will be dt-string asc or dt-string desc to indicate ascending ordering or descending ordering, respectively.
         /// </summary>
-        public DTOrderDir Dir { get; set; }
+        public DtOrderDir Dir { get; set; }
     }
 
     /// <summary>
     /// Sort orders of jQuery DataTables.
     /// </summary>
-    public enum DTOrderDir
+    public enum DtOrderDir
     {
-        ASC,
-        DESC
+        Asc,
+        Desc
     }
 
     /// <summary>
     /// A search, as sent by jQuery DataTables when doing AJAX queries.
     /// </summary>
-    public class DTSearch
+    public class DtSearch
     {
         /// <summary>
         /// Global search value. To be applied to all columns which have searchable as true.

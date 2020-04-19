@@ -1,6 +1,6 @@
 
 \.vs/
 
-jQueryDatatableServerSideNetCore22/bin/
+src/jQueryDatatableServerSideNetCore22/bin/
 
-jQueryDatatableServerSideNetCore22/obj/
+src/jQueryDatatableServerSideNetCore22/obj/

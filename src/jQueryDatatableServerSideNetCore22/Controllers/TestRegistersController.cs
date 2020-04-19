@@ -29,42 +29,24 @@ namespace jQueryDatatableServerSideNetCore22.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoadTable([FromBody]DTParameters dtParameters)
+        public async Task<IActionResult> LoadTable([FromBody]DtParameters dtParameters)
         {
             var searchBy = dtParameters.Search?.Value;
 
-            var orderCriteria = string.Empty;
-            var orderAscendingDirection = true;
+            // if we have an empty search then just order the results by Id ascending
+            var orderCriteria = "Id";
+            var orderAscendingDirection = DtOrderDir.Asc;
 
             if (dtParameters.Order != null)
             {
                 // in this example we just default sort on the 1st column
                 orderCriteria = dtParameters.Columns[dtParameters.Order[0].Column].Data;
-                orderAscendingDirection = dtParameters.Order[0].Dir.ToString().ToLower() == "asc";
-            }
-            else
-            {
-                // if we have an empty search then just order the results by Id ascending
-                orderCriteria = "Id";
-                orderAscendingDirection = true;
+                orderAscendingDirection = dtParameters.Order[0].Dir.ToString().ToLower() == "asc" ? DtOrderDir.Asc : DtOrderDir.Desc;
             }
 
-            var result = await _context.TestRegisters.ToListAsync();
-
-            if (!string.IsNullOrEmpty(searchBy))
-            {
-                result = result.Where(r => r.Name != null && r.Name.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.FirstSurname != null && r.FirstSurname.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.SecondSurname != null && r.SecondSurname.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.Street != null && r.Street.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.Phone != null && r.Phone.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.ZipCode != null && r.ZipCode.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.Country != null && r.Country.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.Notes != null && r.Notes.ToUpper().Contains(searchBy.ToUpper()))
-                    .ToList();
-            }
-
-            result = orderAscendingDirection ? result.AsQueryable().OrderByDynamic(orderCriteria, LinqExtensions.Order.Asc).ToList() : result.AsQueryable().OrderByDynamic(orderCriteria, LinqExtensions.Order.Desc).ToList();
+            var result = _context.TestRegisters
+                .WhereDynamic(searchBy)
+                .OrderByDynamic(orderCriteria,orderAscendingDirection);
 
             // now just get the count of items (without the skip and take) - eg how many could be returned with filtering
             var filteredResultsCount = result.Count();
