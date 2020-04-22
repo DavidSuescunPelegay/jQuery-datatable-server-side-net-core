@@ -1,10 +1,6 @@
 
 \.vs/
 
-src/jQueryDatatableServerSideNetCore22/bin/
+src/jQueryDatatableServerSideNetCore/bin/
 
-src/jQueryDatatableServerSideNetCore22/obj/
-
-src/jQueryDatatableServerSideNetCore30/bin/
-
-src/jQueryDatatableServerSideNetCore30/obj/
+src/jQueryDatatableServerSideNetCore/obj/
