@@ -1,15 +1,13 @@
-# jQuery DataTable Server-Side with ASP.NET Core
+# jQuery DataTable Server-Side with .NET Core
 
 A simple Visual Studio solution using jQuery DataTable with Server-Side processing using .NET Core
 
 ## Table of Contents
 
 * [Getting Started](#getting-started)
-* [Releases](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases)
 * [Branches](#branches)
 * [External libraries](#external-libraries)
 * [Testing](#testing)
-* [Issues](#issues)
 * [Author](#author)
 
 ## Getting Started
@@ -20,11 +18,12 @@ A simple Visual Studio solution using jQuery DataTable with Server-Side processi
 
 ## Branches
 
-| Branch | Description | .NET Core Version |
-|-|-|-|
-| [master](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/master) | Main branch with the latest code | 2.2 (SDK: 2.2.202) |
-| [net-core-22](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-core-22) | Current copy of master branch (to be discontinued) | 2.2 (SDK: 2.2.202) |
-| [net-core-22-old](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-core-22-old) | Old .NET Core 2.2 version (discontinued) | 2.2 (SDK: 2.2.202) |
+| Branches | Releases | .NET Core Version | Description |
+|-|-|-|-|
+| [master](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/master) |  | 3.0 (SDK: 3.0.103) | Development branch |
+| [net-core-30](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-core-30) | [1.2.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.2.0) | 3.0 (SDK: 3.0.103) | Latest version with 3.0 version support |
+| [net-core-22](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-core-22) | [1.1.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.1.0)<br>[1.1.1](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.1.1) | 2.2 (SDK: 2.2.202) | Latest version with 2.2 version support |
+| [net-core-22-old](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-core-22-old) | [1.0.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.0.0) | 2.2 (SDK: 2.2.202) | Old .NET Core 2.2 version (discontinued) |
 
 ## External libraries
 
@@ -38,13 +37,17 @@ A simple Visual Studio solution using jQuery DataTable with Server-Side processi
 
 This project was checked and tested using:
 
-* Microsoft Visual Studio Enterpise 2019 (version 16.5.30011.22) + JetBrains Resharper Ultimate (version 2019.3.4)
-* Windows 10 Pro (version 1909) (OS build 18363.778)
+* Microsoft Visual Studio Enterpise 2019 (version 16.5.30011.22) + JetBrains ReSharper Ultimate (version 2020.1)
+* Windows 10 Pro (version 1909) (OS build 18363.815)
 
 ## Issues
 
-Please, feel free to report any kind of issue [here](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/issues/new).
+Feel free to report any kind of issue [here](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/issues/new)
+
+## Pull requests
+
+You can add new features, improve an existing item or fix bugs by doing a pull request [here](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/pulls)
 
 ## Author
 
-* **David Suescun Pelegay** - *Developer* - [GitHub](https://github.com/DavidSuescunPelegay) - [LinkedIn](https://www.linkedin.com/in/DavidSuescunPelegay)
+* **David Suescun Pelegay** - *Developer* - [LinkedIn](https://www.linkedin.com/in/DavidSuescunPelegay)
