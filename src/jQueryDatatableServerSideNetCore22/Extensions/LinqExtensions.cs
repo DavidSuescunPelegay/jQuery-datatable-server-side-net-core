@@ -40,7 +40,7 @@ namespace jQueryDatatableServerSideNetCore22.Extensions
 
                 //Expression
                 sourceList = sourceList.Where(c =>
-                    properties.Any(p => p.GetValue(c).ToString()
+                    properties.Any(p => p.GetValue(c) != null && p.GetValue(c).ToString()
                         .Contains(query, StringComparison.InvariantCultureIgnoreCase)));
             }
             catch (Exception e)
