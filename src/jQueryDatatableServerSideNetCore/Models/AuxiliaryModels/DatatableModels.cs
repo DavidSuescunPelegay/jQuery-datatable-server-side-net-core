@@ -33,10 +33,17 @@ namespace jQueryDatatableServerSideNetCore.Models.AuxiliaryModels
         /// <summary>
         /// The data to be displayed in the table.
         /// This is an array of data source objects, one for each row, which will be used by DataTables.
-        /// Note that this parameter's name can be changed using the ajaxDT option's dataSrc property.
+        /// Note that this parameter's name can be changed using the ajax option's dataSrc property.
         /// </summary>
         [JsonProperty("data")]
         public IEnumerable<T> Data { get; set; }
+
+        /// <summary>
+        /// Optional: If an error occurs during the running of the server-side processing script, you can inform the user of this error by passing back the error message to be displayed using this parameter.
+        /// Do not include if there is no error.
+        /// </summary>
+        [JsonProperty("error", NullValueHandling = NullValueHandling.Ignore)]
+        public string Error { get; set; }
 
         public string PartialView { get; set; }
     }
@@ -59,11 +66,19 @@ namespace jQueryDatatableServerSideNetCore.Models.AuxiliaryModels
         public virtual string DtRowClass => null;
 
         /// <summary>
-        /// Add this data property to the row's dt-tag tr node allowing abstract data to be added to the node, using the HTML5 data-* attributes.
-        /// This uses the jQuery data() method to set the data, which can also then be used for later retrieval (for example on a click event).
+        /// Add the data contained in the object to the row using the jQuery data() method to set the data, which can also then be used for later retrieval (for example on a click event).
         /// </summary>
         [JsonProperty("DT_RowData")]
         public virtual object DtRowData => null;
+
+        /// <summary>
+        /// Add the data contained in the object to the row dt-tag tr node as attributes.
+        /// The object keys are used as the attribute keys and the values as the corresponding attribute values.
+        /// This is performed using using the jQuery param() method.
+        /// Please note that this option requires DataTables 1.10.5 or newer.
+        /// </summary>
+        [JsonProperty("DT_RowAttr")]
+        public virtual object DtRowAttr => null;
     }
 
     /// <summary>
@@ -147,7 +162,7 @@ namespace jQueryDatatableServerSideNetCore.Models.AuxiliaryModels
         public bool Orderable { get; set; }
 
         /// <summary>
-        /// Specific search value.
+        /// Search value to apply to this specific column.
         /// </summary>
         public DtSearch Search { get; set; }
     }
