@@ -33,7 +33,8 @@ namespace jQueryDatatableServerSideNetCore.Controllers
         {
             var searchBy = dtParameters.Search?.Value;
 
-            var orderCriteria = string.Empty;
+            // if we have an empty search then just order the results by Id ascending
+            var orderCriteria = "Id";
             var orderAscendingDirection = true;
 
             if (dtParameters.Order != null)
@@ -42,14 +43,8 @@ namespace jQueryDatatableServerSideNetCore.Controllers
                 orderCriteria = dtParameters.Columns[dtParameters.Order[0].Column].Data;
                 orderAscendingDirection = dtParameters.Order[0].Dir.ToString().ToLower() == "asc";
             }
-            else
-            {
-                // if we have an empty search then just order the results by Id ascending
-                orderCriteria = "Id";
-                orderAscendingDirection = true;
-            }
 
-            var result = await _context.TestRegisters.ToListAsync();
+            var result = _context.TestRegisters.AsQueryable();
 
             if (!string.IsNullOrEmpty(searchBy))
             {
@@ -60,25 +55,24 @@ namespace jQueryDatatableServerSideNetCore.Controllers
                                            r.Phone != null && r.Phone.ToUpper().Contains(searchBy.ToUpper()) ||
                                            r.ZipCode != null && r.ZipCode.ToUpper().Contains(searchBy.ToUpper()) ||
                                            r.Country != null && r.Country.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.Notes != null && r.Notes.ToUpper().Contains(searchBy.ToUpper()))
-                    .ToList();
+                                           r.Notes != null && r.Notes.ToUpper().Contains(searchBy.ToUpper()));
             }
 
-            result = orderAscendingDirection ? result.AsQueryable().OrderByDynamic(orderCriteria, DtOrderDir.Asc).ToList() : result.AsQueryable().OrderByDynamic(orderCriteria, DtOrderDir.Desc).ToList();
+            result = orderAscendingDirection ? result.OrderByDynamic(orderCriteria, DtOrderDir.Asc) : result.OrderByDynamic(orderCriteria, DtOrderDir.Desc);
 
             // now just get the count of items (without the skip and take) - eg how many could be returned with filtering
-            var filteredResultsCount = result.Count();
+            var filteredResultsCount = await result.CountAsync();
             var totalResultsCount = await _context.TestRegisters.CountAsync();
 
-            return Json(new
+            return Json(new DtResult<TestRegister>
             {
-                draw = dtParameters.Draw,
-                recordsTotal = totalResultsCount,
-                recordsFiltered = filteredResultsCount,
-                data = result
+                Draw = dtParameters.Draw,
+                RecordsTotal = totalResultsCount,
+                RecordsFiltered = filteredResultsCount,
+                Data = await result
                     .Skip(dtParameters.Start)
                     .Take(dtParameters.Length)
-                    .ToList()
+                    .ToListAsync()
             });
         }
 
