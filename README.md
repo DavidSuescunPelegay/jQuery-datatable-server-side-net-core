@@ -38,8 +38,8 @@ A simple Visual Studio solution using jQuery DataTable with Server-Side processi
 
 This project was checked and tested using:
 
-* Microsoft Visual Studio Enterpise 2019 (version 16.5.30011.22) + JetBrains ReSharper Ultimate (version 2020.1)
-* Windows 10 Pro (version 1909) (OS build 18363.815)
+* Microsoft Visual Studio Enterpise 2019 (version 16.6.30204.135) + JetBrains ReSharper Ultimate (version 2020.1.4)
+* Windows 10 Pro (version 2004) (OS build 19041.388)
 
 ## Issues
 
