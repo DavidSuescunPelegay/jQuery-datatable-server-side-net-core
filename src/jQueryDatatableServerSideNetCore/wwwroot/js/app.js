@@ -1,8 +1,10 @@
-﻿$(document).ready(function () {
+﻿var table;
+
+$(document).ready(function () {
     $.fn.dataTable.moment("DD/MM/YYYY HH:mm:ss");
     $.fn.dataTable.moment("DD/MM/YYYY");
 
-    $("#test-registers").DataTable({
+    table = $("#test-registers").DataTable({
         // Design Assets
         stateSave: true,
         autoWidth: true,
@@ -62,7 +64,13 @@
                     return data;
                 }
             },
-            { targets: "date-type", type: "date-eu" }
+            { targets: "date-type", type: "date-eu" },
+            {
+                targets: 10,
+                data: null,
+                defaultContent: "<a class='btn btn-link' role='button' href='#' onclick='edit(this)'>Edit</a>",
+                orderable: false
+            },
         ]
     });
 });
@@ -73,5 +81,12 @@ function strtrunc(str, num) {
     }
     else {
         return str;
+    }
+}
+
+function edit(rowContext) {
+    if (table) {
+        var data = table.row($(rowContext).parents("tr")).data();
+        alert("Example showing row edit with id: " + data["id"] + ", name: " + data["name"]);
     }
 }
