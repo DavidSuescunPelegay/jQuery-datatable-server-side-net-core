@@ -107,12 +107,16 @@ function renderDownloadForm(format) {
     // Get jQuery DataTables AJAX params
     var datatableParams = $('#test-registers').DataTable().ajax.params();
 
-    var searchModelInput = $("<input>")
-        .attr("type", "hidden")
-        .attr("name", "dtParameters")
-        .val(datatableParams);
+    if ($("#export-to-file-form input[name=dtParameters]").val()) {
+        $('#export-to-file-form input[name=dtParameters]').val(datatableParams);
+    } else {
+        var searchModelInput = $("<input>")
+            .attr("type", "hidden")
+            .attr("name", "dtParameters")
+            .val(datatableParams);
 
-    $('#export-to-file-form').append(searchModelInput);
+        $('#export-to-file-form').append(searchModelInput);
+    }
 }
 
 function exportToExcel() {
