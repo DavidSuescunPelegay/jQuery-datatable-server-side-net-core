@@ -13,6 +13,16 @@ $(document).ready(function () {
         serverSide: true,
         // Paging Setups
         paging: true,
+        // Custom Export Buttons
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                text: 'Excel',
+                action: function () {
+                    exportToExcel();
+                }
+            }
+        ],
         // Searching Setups
         searching: { regex: true },
         // Ajax Filter
@@ -89,4 +99,24 @@ function edit(rowContext) {
         var data = table.row($(rowContext).parents("tr")).data();
         alert("Example showing row edit with id: " + data["id"] + ", name: " + data["name"]);
     }
+}
+
+function renderDownloadForm(format) {
+    $('#export-to-file-form').attr('action', '/TestRegisters/ExportTable?format=' + format);
+
+    // Get jQuery DataTables AJAX params
+    var datatableParams = $('#test-registers').DataTable().ajax.params();
+
+    var searchModelInput = $("<input>")
+        .attr("type", "hidden")
+        .attr("name", "dtParameters")
+        .val(datatableParams);
+
+    $('#export-to-file-form').append(searchModelInput);
+}
+
+function exportToExcel() {
+    renderDownloadForm("excel");
+
+    $("#export-to-file-form").submit();
 }

@@ -1,23 +1,27 @@
 ﻿using jQueryDatatableServerSideNetCore.Data;
+using jQueryDatatableServerSideNetCore.Extensions;
 using jQueryDatatableServerSideNetCore.Models.AuxiliaryModels;
+using jQueryDatatableServerSideNetCore.Models.DatabaseModels;
+using jQueryDatatableServerSideNetCore.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using RandomGen;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using jQueryDatatableServerSideNetCore.Extensions;
-using jQueryDatatableServerSideNetCore.Models.DatabaseModels;
-using Microsoft.EntityFrameworkCore;
-using RandomGen;
 
 namespace jQueryDatatableServerSideNetCore.Controllers
 {
     public class TestRegistersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IExportService _exportService;
 
-        public TestRegistersController(ApplicationDbContext context)
+        public TestRegistersController(ApplicationDbContext context, IExportService exportService)
         {
             _context = context;
+            _exportService = exportService;
         }
 
         // GET: TestRegisters
@@ -29,7 +33,7 @@ namespace jQueryDatatableServerSideNetCore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LoadTable([FromBody]DtParameters dtParameters)
+        public async Task<IActionResult> LoadTable([FromBody] DtParameters dtParameters)
         {
             var searchBy = dtParameters.Search?.Value;
 
@@ -74,6 +78,64 @@ namespace jQueryDatatableServerSideNetCore.Controllers
                     .Take(dtParameters.Length)
                     .ToListAsync()
             });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ExportTable([FromQuery] string format)
+        {
+            var rawDtParametersData = HttpContext.Request.Form["dtParameters"];
+
+            var dtParameters = new DtParameters();
+            if (!string.IsNullOrEmpty(rawDtParametersData))
+            {
+                dtParameters = JsonConvert.DeserializeObject<DtParameters>(rawDtParametersData);
+            }
+
+            var searchBy = dtParameters.Search?.Value;
+
+            // if we have an empty search then just order the results by Id ascending
+            var orderCriteria = "Id";
+            var orderAscendingDirection = true;
+
+            if (dtParameters.Order != null)
+            {
+                // in this example we just default sort on the 1st column
+                orderCriteria = dtParameters.Columns[dtParameters.Order[0].Column].Data;
+                orderAscendingDirection = dtParameters.Order[0].Dir.ToString().ToLower() == "asc";
+            }
+
+            var result = _context.TestRegisters.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchBy))
+            {
+                result = result.Where(r => r.Name != null && r.Name.ToUpper().Contains(searchBy.ToUpper()) ||
+                                           r.FirstSurname != null && r.FirstSurname.ToUpper().Contains(searchBy.ToUpper()) ||
+                                           r.SecondSurname != null && r.SecondSurname.ToUpper().Contains(searchBy.ToUpper()) ||
+                                           r.Street != null && r.Street.ToUpper().Contains(searchBy.ToUpper()) ||
+                                           r.Phone != null && r.Phone.ToUpper().Contains(searchBy.ToUpper()) ||
+                                           r.ZipCode != null && r.ZipCode.ToUpper().Contains(searchBy.ToUpper()) ||
+                                           r.Country != null && r.Country.ToUpper().Contains(searchBy.ToUpper()) ||
+                                           r.Notes != null && r.Notes.ToUpper().Contains(searchBy.ToUpper()));
+            }
+
+            result = orderAscendingDirection ? result.OrderByDynamic(orderCriteria, DtOrderDir.Asc) : result.OrderByDynamic(orderCriteria, DtOrderDir.Desc);
+
+            var resultList = await result.ToListAsync();
+
+            byte[] dataByteArray;
+
+            switch (format)
+            {
+                case ExportFormat.Excel:
+                    dataByteArray = await _exportService.ExportToExcel(resultList);
+
+                    return File(
+                        dataByteArray,
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "data.xlsx");
+            }
+
+            return null;
         }
 
         public async Task SeedData()
