@@ -1,4 +1,5 @@
 using jQueryDatatableServerSideNetCore.Data;
+using jQueryDatatableServerSideNetCore.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -35,6 +36,8 @@ namespace jQueryDatatableServerSideNetCore
                 });
 
             services.AddRazorPages();
+
+            services.AddScoped<IExportService, ExportService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
