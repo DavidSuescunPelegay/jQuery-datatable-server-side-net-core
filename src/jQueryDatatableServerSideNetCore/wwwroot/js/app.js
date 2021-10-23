@@ -107,12 +107,13 @@ function renderDownloadForm(format) {
     // Get jQuery DataTables AJAX params
     var datatableParams = $('#test-registers').DataTable().ajax.params();
 
-    if ($("#export-to-file-form input[name=dtParameters]").val()) {
-        $('#export-to-file-form input[name=dtParameters]').val(datatableParams);
+    // If the input exists, replace value, if not create the input and append to form
+    if ($("#export-to-file-form input[name=dtParametersJson]").val()) {
+        $('#export-to-file-form input[name=dtParametersJson]').val(datatableParams);
     } else {
         var searchModelInput = $("<input>")
             .attr("type", "hidden")
-            .attr("name", "dtParameters")
+            .attr("name", "dtParametersJson")
             .val(datatableParams);
 
         $('#export-to-file-form').append(searchModelInput);

@@ -81,14 +81,12 @@ namespace jQueryDatatableServerSideNetCore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ExportTable([FromQuery] string format)
+        public async Task<IActionResult> ExportTable([FromQuery] string format, [FromForm] string dtParametersJson)
         {
-            var rawDtParametersData = HttpContext.Request.Form["dtParameters"];
-
             var dtParameters = new DtParameters();
-            if (!string.IsNullOrEmpty(rawDtParametersData))
+            if (!string.IsNullOrEmpty(dtParametersJson))
             {
-                dtParameters = JsonConvert.DeserializeObject<DtParameters>(rawDtParametersData);
+                dtParameters = JsonConvert.DeserializeObject<DtParameters>(dtParametersJson);
             }
 
             var searchBy = dtParameters.Search?.Value;
