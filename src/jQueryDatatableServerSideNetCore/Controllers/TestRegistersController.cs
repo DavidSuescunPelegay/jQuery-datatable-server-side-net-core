@@ -13,11 +13,19 @@ using System.Threading.Tasks;
 
 namespace jQueryDatatableServerSideNetCore.Controllers
 {
+    /// <summary>
+    ///   <br />
+    /// </summary>
+    [ApiController]
+    [Route("[controller]")]
     public class TestRegistersController : Controller
     {
         private readonly ApplicationDbContext _context;
         private readonly IExportService _exportService;
 
+        /// <summary>Initializes a new instance of the <see cref="TestRegistersController" /> class.</summary>
+        /// <param name="context">The context.</param>
+        /// <param name="exportService">The export service.</param>
         public TestRegistersController(ApplicationDbContext context, IExportService exportService)
         {
             _context = context;
@@ -25,6 +33,11 @@ namespace jQueryDatatableServerSideNetCore.Controllers
         }
 
         // GET: TestRegisters
+        /// <summary>Indexes this instance.</summary>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             await SeedData();
@@ -32,7 +45,12 @@ namespace jQueryDatatableServerSideNetCore.Controllers
             return View();
         }
 
-        [HttpPost]
+        /// <summary>Loads the table.</summary>
+        /// <param name="dtParameters">The dt parameters.</param>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        [HttpPost("LoadTable")]
         public async Task<IActionResult> LoadTable([FromBody] DtParameters dtParameters)
         {
             var searchBy = dtParameters.Search?.Value;
@@ -80,7 +98,13 @@ namespace jQueryDatatableServerSideNetCore.Controllers
             });
         }
 
-        [HttpPost]
+        /// <summary>Exports the table.</summary>
+        /// <param name="format">The format.</param>
+        /// <param name="dtParametersJson">The dt parameters json.</param>
+        /// <returns>
+        ///   <br />
+        /// </returns>
+        [HttpPost("ExportTable")]
         public async Task<IActionResult> ExportTable([FromQuery] string format, [FromForm] string dtParametersJson)
         {
             var dtParameters = new DtParameters();
@@ -136,6 +160,8 @@ namespace jQueryDatatableServerSideNetCore.Controllers
             return null;
         }
 
+        /// <summary>Seeds the data.</summary>
+        [NonAction]
         public async Task SeedData()
         {
             if (!_context.TestRegisters.Any())
