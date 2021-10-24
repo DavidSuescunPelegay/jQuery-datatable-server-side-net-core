@@ -1,4 +1,4 @@
-# .NET 5.0 Guide
+# .NET 5.0 Guide (Preview versions only)
 
 If you want to develop a project using .NET 5.0 you'll need to follow this steps:
 
