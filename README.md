@@ -1,6 +1,6 @@
-# jQuery DataTable Server-Side with .NET 5
+# jQuery DataTable Server-Side with .NET
 
-A simple Visual Studio solution using jQuery DataTable with Server-Side processing using .NET 5
+A simple Visual Studio solution using jQuery DataTable with Server-Side processing using .NET
 
 ## Table of Contents
 
