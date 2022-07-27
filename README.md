@@ -22,7 +22,8 @@ A simple Visual Studio solution using jQuery DataTable with Server-Side processi
 
 | Branches | Releases | .NET Version | Description |
 |-|-|-|-|
-| [master](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/master) |  | 5.0 (SDK: 5.0.402) | Development branch |
+| [master](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/master) |  | 6.0 (SDK: 6.0.302) | Development branch |
+| [net-60](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-60) | [3.0.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/3.0.0) | 6.0 (SDK: 6.0.302) | Latest version with .NET 6.0 |
 | [net-50](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-50) | [2.0.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/2.0.0) | 5.0 (SDK: 5.0.402) | Latest version with .NET 5.0 |
 | [net-50-preview](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-50-preview) | [1.4.0-preview](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.4.0-preview) | 5.0 (SDK: 5.0.100-preview.7.20366.6) | Latest version with .NET 5.0 ([info](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/master/docs/net-50)) 🧪 |
 | [net-core-31](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-core-31) | [1.3.1](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.3.1)<br>[1.3.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.3.0) | 3.1 (SDK: 3.1.301) | Latest version with .NET Core 3.1 |
@@ -32,9 +33,9 @@ A simple Visual Studio solution using jQuery DataTable with Server-Side processi
 
 ## External libraries
 
-* [Bootstrap (v5.1.3)](https://getbootstrap.com/)
+* [Bootstrap (v5.2.0)](https://getbootstrap.com/)
 * [jQuery (v3.6.0)](https://jquery.com/)
-* [jQuery-datatable (v1.11.3)](https://datatables.net/)
+* [jQuery-datatable (v1.12.1)](https://datatables.net/)
 * [datetime-moment (v1.10.21)](https://datatables.net/plug-ins/sorting/datetime-moment)
 * [momentjs (v2.29.1)](https://momentjs.com/)
 
@@ -42,8 +43,8 @@ A simple Visual Studio solution using jQuery DataTable with Server-Side processi
 
 This project was developed and tested using:
 
-* Microsoft Visual Studio Enterpise 2019 (version 16.11.75.64347) + GhostDoc Community VS Extension (v2021.2.21290) for generating XML Documentation
-* Windows 10 Pro (version 21H1) (OS build 19043.1288)
+* Microsoft Visual Studio Enterpise 2022 (version 17.2.6) + GhostDoc Community VS Extension (v2021.2.21290) for generating XML Documentation
+* Windows 11 Pro (version 21H2) (OS build 22000.832)
 
 ## Issues
 
