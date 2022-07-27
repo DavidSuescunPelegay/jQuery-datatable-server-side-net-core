@@ -16,7 +16,6 @@ namespace jQueryDatatableServerSideNetCore.Controllers
     /// <summary>
     ///   <br />
     /// </summary>
-    [ApiController]
     [Route("[controller]")]
     public class TestRegistersController : Controller
     {
