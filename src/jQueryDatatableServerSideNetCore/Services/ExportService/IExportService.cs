@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace jQueryDatatableServerSideNetCore.Services
+namespace jQueryDatatableServerSideNetCore.Services.ExportService
 {
     public interface IExportService
     {
         Task<byte[]> ExportToExcel(List<TestRegister> registers);
+
+        byte[] ExportToCsv(List<TestRegister> registers);
     }
 }

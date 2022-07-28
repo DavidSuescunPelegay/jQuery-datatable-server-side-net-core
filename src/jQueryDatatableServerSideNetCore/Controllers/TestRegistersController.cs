@@ -2,14 +2,11 @@
 using jQueryDatatableServerSideNetCore.Extensions;
 using jQueryDatatableServerSideNetCore.Models.AuxiliaryModels;
 using jQueryDatatableServerSideNetCore.Models.DatabaseModels;
-using jQueryDatatableServerSideNetCore.Services;
+using jQueryDatatableServerSideNetCore.Services.ExportService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using RandomGen;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace jQueryDatatableServerSideNetCore.Controllers
 {
@@ -154,6 +151,11 @@ namespace jQueryDatatableServerSideNetCore.Controllers
                         dataByteArray,
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                         "data.xlsx");
+
+                case ExportFormat.Csv:
+                    dataByteArray = _exportService.ExportToCsv(resultList);
+
+                    return File(dataByteArray, "application/csv", "data.csv");
             }
 
             return null;

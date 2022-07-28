@@ -8,5 +8,7 @@ namespace jQueryDatatableServerSideNetCore.Data
     public class ExportFormat
     {
         public const string Excel = "excel";
+        public const string Csv = "csv";
+        public const string CsvDelimiter = ",";
     }
 }

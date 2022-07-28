@@ -21,6 +21,12 @@ $(document).ready(function () {
                 action: function () {
                     exportToExcel();
                 }
+            },
+            {
+                text: 'CSV',
+                action: function () {
+                    exportToCsv();
+                }
             }
         ],
         // Searching Setups
@@ -122,6 +128,12 @@ function renderDownloadForm(format) {
 
 function exportToExcel() {
     renderDownloadForm("excel");
+
+    $("#export-to-file-form").submit();
+}
+
+function exportToCsv() {
+    renderDownloadForm("csv");
 
     $("#export-to-file-form").submit();
 }
