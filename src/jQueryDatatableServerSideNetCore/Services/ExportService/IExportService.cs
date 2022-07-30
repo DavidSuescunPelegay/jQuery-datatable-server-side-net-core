@@ -10,5 +10,7 @@ namespace jQueryDatatableServerSideNetCore.Services.ExportService
         Task<byte[]> ExportToExcel(List<TestRegister> registers);
 
         byte[] ExportToCsv(List<TestRegister> registers);
+
+        byte[] ExportToHtml(List<TestRegister> registers);
     }
 }

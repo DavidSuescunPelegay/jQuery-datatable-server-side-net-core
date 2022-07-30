@@ -140,22 +140,23 @@ namespace jQueryDatatableServerSideNetCore.Controllers
 
             var resultList = await result.ToListAsync();
 
-            byte[] dataByteArray;
-
             switch (format)
             {
                 case ExportFormat.Excel:
-                    dataByteArray = await _exportService.ExportToExcel(resultList);
-
                     return File(
-                        dataByteArray,
+                        await _exportService.ExportToExcel(resultList),
                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                         "data.xlsx");
 
                 case ExportFormat.Csv:
-                    dataByteArray = _exportService.ExportToCsv(resultList);
+                    return File(_exportService.ExportToCsv(resultList),
+                        "application/csv",
+                        "data.csv");
 
-                    return File(dataByteArray, "application/csv", "data.csv");
+                case ExportFormat.Html:
+                    return File(_exportService.ExportToHtml(resultList),
+                        "application/csv",
+                        "data.html");
             }
 
             return null;
