@@ -14,16 +14,17 @@ A simple Visual Studio solution using jQuery DataTable with Server-Side processi
 
 ## Getting Started
 
-* Download the latest release [here](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/latest), are you looking for an [older release?](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases)
+* Download the latest release [here](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/latest), or download a previous release [here](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases)
 * Uncompress the ZIP and open the solution with Visual Studio
 * Run or Debug the solution and you'll have 1000 rows being server-side processed with jQuery DataTable plugin
+* Export the filtered registers in several formats: Excel, CSV and HTML
 
 ## Branches
 
 | Branches | Releases | .NET Version | Description |
 |-|-|-|-|
 | [master](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/master) |  | 6.0 (SDK: 6.0.302) | Development branch |
-| [net-60](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-60) | [3.1.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/3.1.0)<br>[3.0.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/3.0.0) | 6.0 (SDK: 6.0.302) | Latest version with .NET 6.0 |
+| [net-60](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-60) | [3.2.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/3.2.0)<br>[3.1.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/3.1.0)<br>[3.0.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/3.0.0) | 6.0 (SDK: 6.0.302) | Latest version with .NET 6.0 |
 | [net-50](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-50) | [2.0.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/2.0.0) | 5.0 (SDK: 5.0.402) | Latest version with .NET 5.0 |
 | [net-50-preview](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-50-preview) | [1.4.0-preview](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.4.0-preview) | 5.0 (SDK: 5.0.100-preview.7.20366.6) | Latest version with .NET 5.0 ([info](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/master/docs/net-50)) 🧪 |
 | [net-core-31](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/tree/net-core-31) | [1.3.1](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.3.1)<br>[1.3.0](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/tag/1.3.0) | 3.1 (SDK: 3.1.301) | Latest version with .NET Core 3.1 |
