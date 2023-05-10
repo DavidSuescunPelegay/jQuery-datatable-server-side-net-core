@@ -45,6 +45,12 @@ $(document).ready(function () {
                 action: function () {
                     exportToXml();
                 }
+            },
+            {
+                text: 'YAML',
+                action: function () {
+                    exportToYaml();
+                }
             }
         ],
         // Searching Setups
@@ -170,6 +176,12 @@ function exportToJson() {
 
 function exportToXml() {
     renderDownloadForm("xml");
+
+    $("#export-to-file-form").submit();
+}
+
+function exportToYaml() {
+    renderDownloadForm("yaml");
 
     $("#export-to-file-form").submit();
 }

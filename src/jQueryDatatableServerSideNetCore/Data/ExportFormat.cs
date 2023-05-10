@@ -13,5 +13,6 @@ namespace jQueryDatatableServerSideNetCore.Data
         public const string Html = "html";
         public const string Json = "json";
         public const string Xml = "xml";
+        public const string Yaml = "yaml";
     }
 }

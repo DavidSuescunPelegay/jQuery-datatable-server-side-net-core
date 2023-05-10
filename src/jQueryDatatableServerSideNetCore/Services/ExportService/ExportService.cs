@@ -4,6 +4,8 @@ using jQueryDatatableServerSideNetCore.Services.ExcelService;
 using jQueryDatatableServerSideNetCore.Services.HtmlService;
 using jQueryDatatableServerSideNetCore.Services.JsonService;
 using jQueryDatatableServerSideNetCore.Services.XmlService;
+using jQueryDatatableServerSideNetCore.Services.YamlService;
+using System.Text;
 
 namespace jQueryDatatableServerSideNetCore.Services.ExportService
 {
@@ -14,14 +16,16 @@ namespace jQueryDatatableServerSideNetCore.Services.ExportService
         private readonly IHtmlService _htmlService;
         private readonly IJsonService _jsonService;
         private readonly IXmlService _xmlService;
+        private readonly IYamlService _yamlService;
 
-        public ExportService(IExcelService excelService, ICsvService csvService, IHtmlService htmlService, IJsonService jsonService, IXmlService xmlService)
+        public ExportService(IExcelService excelService, ICsvService csvService, IHtmlService htmlService, IJsonService jsonService, IXmlService xmlService, IYamlService yamlService)
         {
             _excelService = excelService;
             _csvService = csvService;
             _htmlService = htmlService;
             _jsonService = jsonService;
             _xmlService = xmlService;
+            _yamlService = yamlService;
         }
 
         public async Task<byte[]> ExportToExcel(List<TestRegister> registers)
@@ -47,6 +51,11 @@ namespace jQueryDatatableServerSideNetCore.Services.ExportService
         public byte[] ExportToXml(List<TestRegister> registers)
         {
             return _xmlService.Write(registers);
+        }
+
+        public byte[] ExportToYaml(List<TestRegister> registers)
+        {
+            return _yamlService.Write(registers);
         }
     }
 }
