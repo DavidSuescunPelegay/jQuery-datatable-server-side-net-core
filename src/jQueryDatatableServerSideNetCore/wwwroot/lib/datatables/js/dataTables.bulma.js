@@ -11,20 +11,33 @@
 	}
 	else if ( typeof exports === 'object' ) {
 		// CommonJS
-		module.exports = function (root, $) {
-			if ( ! root ) {
-				root = window;
+		var jq = require('jquery');
+		var cjsRequires = function (root, $) {
+			if ( ! $.fn.dataTable ) {
+				require('datatables.net')(root, $);
 			}
-
-			if ( ! $ || ! $.fn.dataTable ) {
-				// Require DataTables, which attaches to jQuery, including
-				// jQuery if needed and have a $ property so we can access the
-				// jQuery object that is used
-				$ = require('datatables.net')(root, $).$;
-			}
-
-			return factory( $, root, root.document );
 		};
+
+		if (typeof window !== 'undefined') {
+			module.exports = function (root, $) {
+				if ( ! root ) {
+					// CommonJS environments without a window global must pass a
+					// root. This will give an error otherwise
+					root = window;
+				}
+
+				if ( ! $ ) {
+					$ = jq( root );
+				}
+
+				cjsRequires( root, $ );
+				return factory( $, root, root.document );
+			};
+		}
+		else {
+			cjsRequires( window, jq );
+			module.exports = factory( jq, window, window.document );
+		}
 	}
 	else {
 		// Browser
@@ -33,6 +46,7 @@
 }(function( $, window, document, undefined ) {
 'use strict';
 var DataTable = $.fn.dataTable;
+
 
 
 /* Set the defaults for DataTables initialisation */
@@ -64,7 +78,7 @@ DataTable.ext.renderer.pageButton.bulma = function ( settings, host, idx, button
 	var classes = settings.oClasses;
 	var lang    = settings.oLanguage.oPaginate;
 	var aria = settings.oLanguage.oAria.paginate || {};
-	var btnDisplay, btnClass, counter=0;
+	var btnDisplay, btnClass;
 
 	var attach = function( container, buttons ) {
 		var i, ien, node, button, tag, disabled;
@@ -133,10 +147,13 @@ DataTable.ext.renderer.pageButton.bulma = function ( settings, host, idx, button
 								null
 						} )
 						.append( $('<' + tag + '>', {
-								'href': '#',
+								'href': disabled ? null : '#',
 								'aria-controls': settings.sTableId,
+								'aria-disabled': disabled ? 'true' : null,
 								'aria-label': aria[ button ],
-								'data-dt-idx': counter,
+								'aria-role': 'link',
+								'aria-current': btnClass === 'is-current' ? 'page' : null,
+								'data-dt-idx': button,
 								'tabindex': settings.iTabIndex,
 								'class': 'pagination-link ' + btnClass,
 								'disabled': disabled
@@ -148,8 +165,6 @@ DataTable.ext.renderer.pageButton.bulma = function ( settings, host, idx, button
 					settings.oApi._fnBindAction(
 						node, {action: button}, clickHandler
 					);
-
-					counter++;
 				}
 			}
 		}
@@ -193,7 +208,6 @@ $(document).on( 'init.dt', function (e, ctx) {
 	// $( 'div.dataTables_filter.ui.input', api.table().container() ).removeClass('input').addClass('form');
 	// $( 'div.dataTables_filter input', api.table().container() ).wrap( '<span class="ui input" />' );
 } );
-
 
 
 return DataTable;
