@@ -157,6 +157,11 @@ namespace jQueryDatatableServerSideNetCore.Controllers
                     return File(_exportService.ExportToHtml(resultList),
                         "application/csv",
                         "data.html");
+
+                case ExportFormat.Json:
+                    return File(_exportService.ExportToJson(resultList),
+                        "application/json",
+                        "data.json");
             }
 
             return null;

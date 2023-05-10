@@ -33,6 +33,12 @@ $(document).ready(function () {
                 action: function () {
                     exportToHtml();
                 }
+            },
+            {
+                text: 'JSON',
+                action: function () {
+                    exportToJson();
+                }
             }
         ],
         // Searching Setups
@@ -146,6 +152,12 @@ function exportToCsv() {
 
 function exportToHtml() {
     renderDownloadForm("html");
+
+    $("#export-to-file-form").submit();
+}
+
+function exportToJson() {
+    renderDownloadForm("json");
 
     $("#export-to-file-form").submit();
 }

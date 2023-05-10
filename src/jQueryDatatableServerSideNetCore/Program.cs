@@ -3,6 +3,7 @@ using jQueryDatatableServerSideNetCore.Services.CsvService;
 using jQueryDatatableServerSideNetCore.Services.ExcelService;
 using jQueryDatatableServerSideNetCore.Services.ExportService;
 using jQueryDatatableServerSideNetCore.Services.HtmlService;
+using jQueryDatatableServerSideNetCore.Services.JsonService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -29,6 +30,7 @@ builder.Services.AddScoped<IExportService, ExportService>();
 builder.Services.AddScoped<IExcelService, ExcelService>();
 builder.Services.AddScoped<ICsvService, CsvService>();
 builder.Services.AddScoped<IHtmlService, HtmlService>();
+builder.Services.AddScoped<IJsonService, JsonService>();
 
 // Register the Swagger generator, defining 1 or more Swagger documents
 builder.Services.AddSwaggerGen(c =>
