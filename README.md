@@ -18,7 +18,7 @@ A simple Visual Studio solution using jQuery DataTable with Server-Side processi
 * Download the latest release [here](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases/latest), or download a previous release [here](https://github.com/DavidSuescunPelegay/jQuery-datatable-server-side-net-core/releases)
 * Uncompress the ZIP and open the solution with Visual Studio
 * Run or Debug the solution and you'll have 1000 rows being server-side processed with jQuery DataTable plugin
-* Export the filtered registers in several formats: Excel, CSV and HTML
+* Export the filtered registers in several formats: Excel, CSV, HTML, JSON, XML and YAML
 
 ## Branches
 
