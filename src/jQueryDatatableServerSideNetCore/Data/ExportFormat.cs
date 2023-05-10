@@ -12,5 +12,6 @@ namespace jQueryDatatableServerSideNetCore.Data
         public const string CsvDelimiter = ",";
         public const string Html = "html";
         public const string Json = "json";
+        public const string Xml = "xml";
     }
 }
