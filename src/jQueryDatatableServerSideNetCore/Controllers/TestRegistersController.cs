@@ -109,69 +109,72 @@ namespace jQueryDatatableServerSideNetCore.Controllers
                 dtParameters = JsonConvert.DeserializeObject<DtParameters>(dtParametersJson);
             }
 
-            var searchBy = dtParameters.Search?.Value;
-
-            // if we have an empty search then just order the results by Id ascending
-            var orderCriteria = "Id";
-            var orderAscendingDirection = true;
-
-            if (dtParameters.Order != null)
+            if (dtParameters != default)
             {
-                // in this example we just default sort on the 1st column
-                orderCriteria = dtParameters.Columns[dtParameters.Order[0].Column].Data;
-                orderAscendingDirection = dtParameters.Order[0].Dir.ToString().ToLower() == "asc";
-            }
+                var searchBy = dtParameters.Search?.Value;
 
-            var result = _context.TestRegisters.AsQueryable();
+                // if we have an empty search then just order the results by Id ascending
+                var orderCriteria = "Id";
+                var orderAscendingDirection = true;
 
-            if (!string.IsNullOrEmpty(searchBy))
-            {
-                result = result.Where(r => r.Name != null && r.Name.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.FirstSurname != null && r.FirstSurname.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.SecondSurname != null && r.SecondSurname.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.Street != null && r.Street.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.Phone != null && r.Phone.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.ZipCode != null && r.ZipCode.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.Country != null && r.Country.ToUpper().Contains(searchBy.ToUpper()) ||
-                                           r.Notes != null && r.Notes.ToUpper().Contains(searchBy.ToUpper()));
-            }
+                if (dtParameters.Order != null)
+                {
+                    // in this example we just default sort on the 1st column
+                    orderCriteria = dtParameters.Columns[dtParameters.Order[0].Column].Data;
+                    orderAscendingDirection = dtParameters.Order[0].Dir.ToString().ToLower() == "asc";
+                }
 
-            result = orderAscendingDirection ? result.OrderByDynamic(orderCriteria, DtOrderDir.Asc) : result.OrderByDynamic(orderCriteria, DtOrderDir.Desc);
+                var result = _context.TestRegisters.AsQueryable();
 
-            var resultList = await result.ToListAsync();
+                if (!string.IsNullOrEmpty(searchBy))
+                {
+                    result = result.Where(r => r.Name != null && r.Name.ToUpper().Contains(searchBy.ToUpper()) ||
+                                               r.FirstSurname != null && r.FirstSurname.ToUpper().Contains(searchBy.ToUpper()) ||
+                                               r.SecondSurname != null && r.SecondSurname.ToUpper().Contains(searchBy.ToUpper()) ||
+                                               r.Street != null && r.Street.ToUpper().Contains(searchBy.ToUpper()) ||
+                                               r.Phone != null && r.Phone.ToUpper().Contains(searchBy.ToUpper()) ||
+                                               r.ZipCode != null && r.ZipCode.ToUpper().Contains(searchBy.ToUpper()) ||
+                                               r.Country != null && r.Country.ToUpper().Contains(searchBy.ToUpper()) ||
+                                               r.Notes != null && r.Notes.ToUpper().Contains(searchBy.ToUpper()));
+                }
 
-            switch (format)
-            {
-                case ExportFormat.Excel:
-                    return File(
-                        await _exportService.ExportToExcel(resultList),
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                        "data.xlsx");
+                result = orderAscendingDirection ? result.OrderByDynamic(orderCriteria, DtOrderDir.Asc) : result.OrderByDynamic(orderCriteria, DtOrderDir.Desc);
 
-                case ExportFormat.Csv:
-                    return File(_exportService.ExportToCsv(resultList),
-                        "application/csv",
-                        "data.csv");
+                var resultList = await result.ToListAsync();
 
-                case ExportFormat.Html:
-                    return File(_exportService.ExportToHtml(resultList),
-                        "application/csv",
-                        "data.html");
+                switch (format)
+                {
+                    case ExportFormat.Excel:
+                        return File(
+                            await _exportService.ExportToExcel(resultList),
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "data.xlsx");
 
-                case ExportFormat.Json:
-                    return File(_exportService.ExportToJson(resultList),
-                        "application/json",
-                        "data.json");
+                    case ExportFormat.Csv:
+                        return File(_exportService.ExportToCsv(resultList),
+                            "application/csv",
+                            "data.csv");
 
-                case ExportFormat.Xml:
-                    return File(_exportService.ExportToXml(resultList),
-                        "application/xml",
-                        "data.xml");
+                    case ExportFormat.Html:
+                        return File(_exportService.ExportToHtml(resultList),
+                            "application/csv",
+                            "data.html");
 
-                case ExportFormat.Yaml:
-                    return File(_exportService.ExportToYaml(resultList),
-                        "application/yaml",
-                        "data.yaml");
+                    case ExportFormat.Json:
+                        return File(_exportService.ExportToJson(resultList),
+                            "application/json",
+                            "data.json");
+
+                    case ExportFormat.Xml:
+                        return File(_exportService.ExportToXml(resultList),
+                            "application/xml",
+                            "data.xml");
+
+                    case ExportFormat.Yaml:
+                        return File(_exportService.ExportToYaml(resultList),
+                            "application/yaml",
+                            "data.yaml");
+                }
             }
 
             return null;
