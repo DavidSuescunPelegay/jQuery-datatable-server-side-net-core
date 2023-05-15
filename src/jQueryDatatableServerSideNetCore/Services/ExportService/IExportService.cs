@@ -16,5 +16,7 @@ namespace jQueryDatatableServerSideNetCore.Services.ExportService
         byte[] ExportToJson(List<TestRegister> registers);
 
         byte[] ExportToXml(List<TestRegister> registers);
+
+        byte[] ExportToYaml(List<TestRegister> registers);
     }
 }
