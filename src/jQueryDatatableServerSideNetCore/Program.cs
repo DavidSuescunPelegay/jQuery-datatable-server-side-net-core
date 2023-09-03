@@ -28,7 +28,7 @@ builder.Services.AddControllersWithViews()
         options.SerializerSettings.Converters.Add(new StringEnumConverter());
     });
 
-builder.Services.AddScoped<IExportService, ExportService>();
+builder.Services.AddScoped(typeof(IExportService<>), typeof(ExportService<>));
 builder.Services.AddScoped<IExcelService, ExcelService>();
 builder.Services.AddScoped<ICsvService, CsvService>();
 builder.Services.AddScoped<IHtmlService, HtmlService>();
