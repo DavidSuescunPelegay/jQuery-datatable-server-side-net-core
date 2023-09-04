@@ -9,7 +9,7 @@ using System.Text;
 
 namespace jQueryDatatableServerSideNetCore.Services.ExportService
 {
-    public class ExportService : IExportService
+    public class ExportService<TModel> : IExportService<TModel> where TModel : class
     {
         private readonly IExcelService _excelService;
         private readonly ICsvService _csvService;
@@ -28,32 +28,32 @@ namespace jQueryDatatableServerSideNetCore.Services.ExportService
             _yamlService = yamlService;
         }
 
-        public async Task<byte[]> ExportToExcel(List<TestRegister> registers)
+        public async Task<byte[]> ExportToExcel(List<TModel> registers)
         {
             return await _excelService.Write(registers);
         }
 
-        public byte[] ExportToCsv(List<TestRegister> registers)
+        public byte[] ExportToCsv(List<TModel> registers)
         {
             return _csvService.Write(registers);
         }
 
-        public byte[] ExportToHtml(List<TestRegister> registers)
+        public byte[] ExportToHtml(List<TModel> registers)
         {
             return _htmlService.Write(registers);
         }
 
-        public byte[] ExportToJson(List<TestRegister> registers)
+        public byte[] ExportToJson(List<TModel> registers)
         {
             return _jsonService.Write(registers);
         }
 
-        public byte[] ExportToXml(List<TestRegister> registers)
+        public byte[] ExportToXml(List<TModel> registers)
         {
             return _xmlService.Write(registers);
         }
 
-        public byte[] ExportToYaml(List<TestRegister> registers)
+        public byte[] ExportToYaml(List<TModel> registers)
         {
             return _yamlService.Write(registers);
         }

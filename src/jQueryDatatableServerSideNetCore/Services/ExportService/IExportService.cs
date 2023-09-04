@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace jQueryDatatableServerSideNetCore.Services.ExportService
 {
-    public interface IExportService
+    public interface IExportService<TModel> where TModel : class
     {
-        Task<byte[]> ExportToExcel(List<TestRegister> registers);
+        Task<byte[]> ExportToExcel(List<TModel> registers);
 
-        byte[] ExportToCsv(List<TestRegister> registers);
+        byte[] ExportToCsv(List<TModel> registers);
 
-        byte[] ExportToHtml(List<TestRegister> registers);
+        byte[] ExportToHtml(List<TModel> registers);
 
-        byte[] ExportToJson(List<TestRegister> registers);
+        byte[] ExportToJson(List<TModel> registers);
 
-        byte[] ExportToXml(List<TestRegister> registers);
+        byte[] ExportToXml(List<TModel> registers);
 
-        byte[] ExportToYaml(List<TestRegister> registers);
+        byte[] ExportToYaml(List<TModel> registers);
     }
 }

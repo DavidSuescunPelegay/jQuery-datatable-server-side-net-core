@@ -17,12 +17,12 @@ namespace jQueryDatatableServerSideNetCore.Controllers
     public class TestRegistersController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly IExportService _exportService;
+        private readonly IExportService<TestRegister> _exportService;
 
         /// <summary>Initializes a new instance of the <see cref="TestRegistersController" /> class.</summary>
         /// <param name="context">The context.</param>
         /// <param name="exportService">The export service.</param>
-        public TestRegistersController(ApplicationDbContext context, IExportService exportService)
+        public TestRegistersController(ApplicationDbContext context, IExportService<TestRegister> exportService)
         {
             _context = context;
             _exportService = exportService;
